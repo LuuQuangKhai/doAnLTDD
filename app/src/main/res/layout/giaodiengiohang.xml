@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/logoCircleK_gioHang"
+        android:src="@drawable/logocirclek_giohang"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.1"
@@ -32,17 +32,19 @@
         android:id="@+id/btn_DatHang"
         android:layout_width="120dp"
         android:layout_height="40dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/button_bg"
         android:text="Đặt hàng"
         android:textColor="@color/white"
-        tools:layout_editor_absoluteX="275dp"
-        tools:layout_editor_absoluteY="675dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageButton
         android:id="@+id/btn_QuayLai"
         android:layout_width="50dp"
         android:layout_height="46dp"
-        android:background="#800000000"
+        android:background="@color/white"
         app:srcCompat="@drawable/baseline_undo_24"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="16dp" />

@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/logoCircleK3"
+        android:src="@drawable/logocirclek3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.25"
@@ -33,31 +33,39 @@
 
         <TextView
             android:id="@+id/btn_Moi"
-            android:layout_width="121dp"
-            android:layout_height="54dp"
+            android:layout_width="120dp"
+            android:layout_height="55dp"
 
 
+            android:layout_marginStart="16dp"
             android:background="@drawable/nen_trang"
             android:gravity="center"
             android:text="MỚI"
             android:textColor="@color/black"
             android:textSize="7pt"
             android:textStyle="bold"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="1dp" />
+            app:layout_constraintEnd_toStartOf="@+id/btn_KhuyenMai"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/btn_YeuThich"
-            android:layout_width="129dp"
-            android:layout_height="56dp"
+            android:layout_width="120dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="119dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="16dp"
             android:background="@drawable/nen_trang"
             android:gravity="center"
             android:text="YÊU THÍCH"
             android:textColor="@color/black"
             android:textSize="7pt"
             android:textStyle="bold"
-            tools:layout_editor_absoluteX="268dp"
-            tools:layout_editor_absoluteY="1dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/btn_KhuyenMai"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/btn_KhuyenMai"
@@ -69,45 +77,55 @@
             android:textColor="@color/black"
             android:textSize="7pt"
             android:textStyle="bold"
-            tools:layout_editor_absoluteX="143dp"
-            tools:layout_editor_absoluteY="1dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
             android:id="@+id/btn_GioHang"
             android:layout_width="35dp"
 
             android:layout_height="35dp"
-            android:background="#8000000000"
-            app:srcCompat="@drawable/giohang_icon"
-            tools:layout_editor_absoluteX="360dp"
-            tools:layout_editor_absoluteY="520dp" />
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="#FF0000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/giohang_icon" />
 
         <ImageButton
             android:id="@+id/btn_ThongTinNguoiDung"
             android:layout_width="40dp"
 
             android:layout_height="40dp"
-            android:background="#8000000000"
-            app:srcCompat="@drawable/nguoi_dung"
-            tools:layout_editor_absoluteX="185dp"
-            tools:layout_editor_absoluteY="515dp" />
+            android:layout_marginBottom="16dp"
+            android:background="#FF0000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/nguoi_dung" />
 
         <ListView
             android:id="@+id/listViewSanPham"
             android:layout_width="409dp"
             android:layout_height="418dp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_KhuyenMai"
-            app:layout_constraintVertical_bias="0.15"
-            tools:layout_editor_absoluteX="1dp" />
+            app:layout_constraintVertical_bias="0.316" />
 
         <ImageButton
             android:id="@+id/imageButton3"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:background="#8000000000"
-            app:srcCompat="@drawable/mo_rong"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="520dp" />
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="#FF0000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/mo_rong" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
