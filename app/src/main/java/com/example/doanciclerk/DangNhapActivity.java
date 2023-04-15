@@ -9,6 +9,6 @@ public class DangNhapActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.signup_tap_fragment);
+        setContentView(R.layout.giaodiennguoidung);
     }
 }
