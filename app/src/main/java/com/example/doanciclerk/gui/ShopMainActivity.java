@@ -13,4 +13,6 @@ public class ShopMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.giaodienadmin);
     }
+
+
 }
