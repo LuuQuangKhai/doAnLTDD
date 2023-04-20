@@ -1,14 +1,16 @@
-package com.example.doanciclerk;
+package com.example.doanciclerk.gui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class DangNhapActivity extends AppCompatActivity {
+import com.example.doanciclerk.R;
+
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.giaodiennguoidung);
+        setContentView(R.layout.activity_main);
     }
 }

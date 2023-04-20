@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DangNhapActivity">
+    tools:context=".gui.DangNhapActivity">
 
     <ImageView
         android:id="@+id/imageView2"
@@ -31,71 +31,40 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0">
 
-        <androidx.viewpager.widget.ViewPager
-            android:id="@id/view_pager"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent=".7"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tap_layout"
-            app:layout_constraintVertical_bias="0"
-
-            />
-
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tap_layout"
+            android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0" />
+            app:layout_constraintVertical_bias="0">
+        </com.google.android.material.tabs.TabLayout>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_google"
-            android:layout_width="wrap_content"
+
+        <androidx.fragment.app.FragmentContainerView
+            app:layout_constraintTop_toBottomOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout="@layout/login_tap_fragment"
+            android:id="@+id/fragLogin"
+            class="com.example.doanciclerk.gui.LoginTapFragment">
+        </androidx.fragment.app.FragmentContainerView>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/white"
-            android:tint="@null"
-            android:elevation="35dp"
-            android:src="@drawable/google"
+            android:background="@drawable/button_bg"
+            android:text="Đăng ký"
+            android:textSize="16sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view_pager" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_facebook"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:backgroundTint="@color/white"
-            android:tint="@null"
-            android:elevation="35dp"
-            android:src="@drawable/facebook"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/fab_google"
-            app:layout_constraintHorizontal_bias="1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view_pager" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_twitter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/white"
-            android:tint="@null"
-            android:elevation="35dp"
-            android:src="@drawable/twitter"
-            app:layout_constraintHorizontal_bias="0"
-            android:layout_marginLeft="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/fab_google"
-            app:layout_constraintTop_toBottomOf="@+id/view_pager" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.85"
+            app:layout_constraintWidth_percent=".8" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
