@@ -1,0 +1,58 @@
+{
+  "accounts": [{ "id": "store1", "password": 123, "accountType": 0},
+    {"id": "customer1", "password": 123, "accountType": 1},
+    {"id": "customer2", "password": 123, "accountType": 1}
+  ],
+  "stores": [{ "id" : "store1", "name" : "Store A", "address" : "somewhere on earth", "wallet" : 2000000}
+  ],
+  "customers": [
+    {
+      "id": "customer1",
+      "name": "Tom",
+      "address": "somewhere on earth too",
+      "wallet": 1000000
+    },
+    {
+      "id": "customer2",
+      "name": "Matt",
+      "address": "somewhere on earth maybe",
+      "wallet": 2300000
+    }
+  ],
+  "orders": [
+    {
+      "id": "OR_1",
+      "goodsID": "GO_1",
+      "goodsAmount": 20,
+      "storeID": "store1",
+      "customerID": "customer1"
+    },
+    {
+      "id": "OR_2",
+      "goodsID": "GO_2",
+      "goodsAmount": 10,
+      "storeID": "store1",
+      "customerID": "customer2"
+    }
+  ],
+  "goods": [
+    {
+      "id": "GO_1",
+      "image": "apple.jpg",
+      "name" : "Apple",
+      "description" : "Good apple",
+      "amount" : 10,
+      "price" : 5000,
+      "storeID" : "store1"
+    },
+    {
+      "id": "GO_2",
+      "image": "kiwi.jpg",
+      "name" : "Kiwi",
+      "description" : "Super good kiwi",
+      "amount" : 30,
+      "price" : 8000,
+      "storeID" : "store1"
+    }
+  ]
+}
