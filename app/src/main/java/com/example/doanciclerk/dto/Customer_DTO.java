@@ -2,9 +2,10 @@ package com.example.doanciclerk.dto;
 
 import android.app.Notification;
 
+import java.io.Serializable;
 import java.util.Stack;
 
-public class Customer_DTO {
+public class Customer_DTO implements Serializable {
     private String id, name, address;
     private double wallet;
 

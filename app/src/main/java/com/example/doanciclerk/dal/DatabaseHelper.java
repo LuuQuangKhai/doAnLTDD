@@ -149,25 +149,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     //Login
-    private int count_Account(SQLiteDatabase db){
+    private int count_Account(SQLiteDatabase db) {
         String sql = "SELECT * FROM Accounts;";
         Cursor c = db.rawQuery(sql, null);
 
         return c.getCount();
     }
-
-    public void initData_Account(SQLiteDatabase db){
-        if(count_Account(db) == 0){
-            ContentValues values = new ContentValues();
-
-            values.put("ID", "asd");
-            values.put("Password", "123");
-            values.put("AccountType", "0");
-
-            db.insert("Account", null, values);
-        }
-    }
-
     public boolean checkLogin(SQLiteDatabase db, Account_DTO account){
         String sql = "SELECT * FROM Accounts WHERE ID = ? AND Password = ? AND AccountType = ?;";
         Cursor c = db.rawQuery(sql, new String[] {account.getId(), account.getPassword(), String.valueOf(account.getAccountType())});
@@ -188,5 +175,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return null;
     }
 
-    //Goods
+    public void addAccount(SQLiteDatabase db,Account_DTO account_dto){
+        ContentValues values = new ContentValues();
+        values.put("ID", account_dto.getId());
+        values.put("Password", account_dto.getPassword());
+        values.put("AccountType", account_dto.getAccountType());
+
+        db.insert("Accounts", null, values);
+    }
 }

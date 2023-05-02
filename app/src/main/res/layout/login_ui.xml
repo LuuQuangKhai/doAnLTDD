@@ -53,10 +53,11 @@
         </androidx.fragment.app.FragmentContainerView>
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSignUp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/button_bg"
-            android:text="Đăng ký"
+            android:text="Sign up"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

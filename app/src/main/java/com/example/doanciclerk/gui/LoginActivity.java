@@ -63,5 +63,15 @@ public class LoginActivity extends AppCompatActivity {
             } else
                 Toast.makeText(this, "ID or Password is not valid", Toast.LENGTH_SHORT).show();
         });
+
+        Button signup = findViewById(R.id.btnSignUp);
+
+        signup.setOnClickListener(v -> {
+            int type = tabLayout.getSelectedTabPosition();
+
+            Intent i = new Intent(this, SignUpActivity.class);
+            i.putExtra("Type", type);
+            startActivity(i);
+        });
     }
 }

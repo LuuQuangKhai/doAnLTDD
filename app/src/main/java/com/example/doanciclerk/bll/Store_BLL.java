@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 
 import com.example.doanciclerk.dal.DatabaseHelper;
+import com.example.doanciclerk.dto.Customer_DTO;
 import com.example.doanciclerk.dto.Goods_DTO;
 import com.example.doanciclerk.dto.Store_DTO;
 
@@ -36,5 +37,15 @@ public class Store_BLL {
 
         db.getWritableDatabase().update("Stores", values, "ID = ?", new String[]{store_dto.getId()});
         db.close();
+    }
+
+    public void addStore(Store_DTO store_dto){
+        ContentValues values = new ContentValues();
+        values.put("ID", store_dto.getId());
+        values.put("Name", store_dto.getName());
+        values.put("Address", store_dto.getAddress());
+        values.put("Wallet", store_dto.getWallet());
+
+        db.getWritableDatabase().insert("Stores", null, values);
     }
 }

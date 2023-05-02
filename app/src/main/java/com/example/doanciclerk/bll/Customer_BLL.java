@@ -28,4 +28,14 @@ public class Customer_BLL {
         db.close();
         return null;
     }
+
+    public void addCustomer(Customer_DTO customer_dto){
+        ContentValues values = new ContentValues();
+        values.put("ID", customer_dto.getId());
+        values.put("Name", customer_dto.getName());
+        values.put("Address", customer_dto.getAddress());
+        values.put("Wallet", customer_dto.getWallet());
+
+        db.getWritableDatabase().insert("Customers", null, values);
+    }
 }

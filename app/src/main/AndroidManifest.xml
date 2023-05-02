@@ -11,18 +11,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DoAnCiclerK"
         tools:targetApi="31">
-
+        <activity
+            android:name=".gui.SignUpActivity"
+            android:exported="false" />
         <activity
             android:name=".gui.OrderManageActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".gui.StoreInfoActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".gui.DetailStorageItemActivity_Add"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".gui.DetailStorageItemActivity"
             android:exported="false" />
