@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,14 +14,27 @@
         android:theme="@style/Theme.DoAnCiclerK"
         tools:targetApi="31">
         <activity
+            android:name=".gui.CustomerOrderActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".gui.CustomerInfoActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".gui.DetailCustomerItemActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".gui.CustomerMainActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
             android:name=".gui.SignUpActivity"
             android:exported="false" />
         <activity
             android:name=".gui.OrderManageActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".gui.StoreInfoActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".gui.DetailStorageItemActivity_Add"
             android:exported="false" />
@@ -28,7 +43,8 @@
             android:exported="false" />
         <activity
             android:name=".gui.StorageActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity
             android:name=".gui.ShopMainActivity"
             android:exported="false" />

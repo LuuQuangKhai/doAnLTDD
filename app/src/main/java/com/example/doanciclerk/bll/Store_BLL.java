@@ -9,6 +9,9 @@ import com.example.doanciclerk.dto.Customer_DTO;
 import com.example.doanciclerk.dto.Goods_DTO;
 import com.example.doanciclerk.dto.Store_DTO;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Store_BLL {
     DatabaseHelper db;
 
@@ -20,9 +23,15 @@ public class Store_BLL {
         String sql = "SELECT * FROM Stores WHERE ID = ?;";
         Cursor c = db.getReadableDatabase().rawQuery(sql, new String[] {id});
 
-        if(c.moveToFirst())
-            return new Store_DTO(c.getString(0), c.getString(1), c.getString(2), c.getDouble(3));
+        if(c.moveToFirst()){
+            Store_DTO store_dto = new Store_DTO(c.getString(0), c.getString(1), c.getString(2), c.getDouble(3));
+            c.close();
+            db.close();
+            return store_dto;
 
+        }
+
+        c.close();
         db.close();
         return null;
     }
@@ -47,5 +56,20 @@ public class Store_BLL {
         values.put("Wallet", store_dto.getWallet());
 
         db.getWritableDatabase().insert("Stores", null, values);
+        db.close();
+    }
+
+    public List<Store_DTO> getStore_List_All(){
+        List<Store_DTO> list = new ArrayList<>();
+
+        String sql = "SELECT * FROM Stores;";
+        Cursor c = db.getReadableDatabase().rawQuery(sql, null);
+
+        while (c.moveToNext())
+            list.add(new Store_DTO(c.getString(0), c.getString(1), c.getString(2), c.getDouble(3)));
+
+        c.close();
+        db.close();
+        return list;
     }
 }

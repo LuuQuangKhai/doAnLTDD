@@ -1,13 +1,13 @@
 package com.example.doanciclerk.non_gui;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,34 +18,39 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.doanciclerk.R;
 import com.example.doanciclerk.bll.Customer_BLL;
-import com.example.doanciclerk.bll.Goods_BLL;
+import com.example.doanciclerk.bll.OrderDetails_BLL;
 import com.example.doanciclerk.bll.Orders_BLL;
-import com.example.doanciclerk.dto.Customer_DTO;
 import com.example.doanciclerk.dto.Goods_DTO;
 import com.example.doanciclerk.dto.Order_DTO;
-import com.example.doanciclerk.gui.DetailStorageItemActivity;
+
+import org.w3c.dom.Text;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.OrderItemVH> {
     List<Order_DTO> list;
 
+    OrderDetails_BLL orderDetails_bll;
     Orders_BLL orders_bll;
-    Goods_BLL goods_bll;
     Customer_BLL customer_bll;
     Context context;
 
     public OrderItemAdapter(List<Order_DTO> list, Context context) {
-        this.list = list;
+        this.list = new ArrayList<>();
+        if(list != null) {
+            this.list = list;
+        }
+
         this.context = context;
 
-        goods_bll = new Goods_BLL(context);
-        customer_bll = new Customer_BLL(context);
         orders_bll = new Orders_BLL(context);
+        customer_bll = new Customer_BLL(context);
+        orderDetails_bll = new OrderDetails_BLL(context);
     }
 
     @NonNull
@@ -59,60 +64,37 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.Orde
     @Override
     public void onBindViewHolder(@NonNull OrderItemVH holder, int position) {
         Order_DTO o = list.get(position);
+        double sumNum = 0;
 
-        String sumText = String.format("Sum: %.0f", o.getPriceSum());
-        holder.sum.setText(sumText);
+        if(o != null)
+            sumNum = o.getPriceSum();
 
-        Customer_DTO c = customer_bll.findCustomerByID(o.getCustomerID());
+        String idText = "OrderID: " + o.getId();
+        holder.id.setText(idText);
 
-        String customerNameText = "Name: " + c.getName();
-        holder.customerName.setText(customerNameText);
+        String nameText = customer_bll.findCustomerByID(o.getCustomerID()).getName();
+        holder.name.setText(nameText);
 
-        String addressText = "Address: " + c.getAddress();
-        holder.address.setText(addressText);
+        String totalText = String.valueOf(o.getPriceSum());
+        holder.total.setText(totalText);
 
-        Goods_DTO g = goods_bll.findGoodsByID(o.getGoodsID(), o.getStoreID());
-
-        String imageName = g.getImage().split("\\.", 2)[0];
-        InputStream is = null;
-        try{
-            is = context.getResources().openRawResource(context.getResources().getIdentifier(imageName, "raw", context.getPackageName()));
-        }
-        catch (Exception e){
-            try {
-                Path p = Paths.get(context.getFilesDir().getPath() + "/" + g.getImage());
-                is = context.getContentResolver().openInputStream(Uri.parse(p.toUri().toString()));
-            } catch (FileNotFoundException ex) {
-                throw new RuntimeException(ex);
-            }
-        }
-        Bitmap img = BitmapFactory.decodeStream(is);
-
-        holder.image.setImageBitmap(img);
-
-        String goodsNameText = "Product: " + g.getName();
-        holder.goodsName.setText(goodsNameText);
-
-        String amountText = "Amount: " + g.getAmount();
-        holder.amount.setText(amountText);
-
-        String priceText = String.format("Price: %.0f",g.getPrice()) + "₫";
-        holder.price.setText(priceText);
-
-        holder.yes.setOnClickListener(v->{
-            orders_bll.deleteOrder(o.getId());
-            list.remove(o);
-            notifyItemRemoved(holder.getAdapterPosition());
-
-            Toast.makeText(context, "Order delivered", Toast.LENGTH_SHORT).show();
-        });
+        OrderItemDetailAdapter adapter = new OrderItemDetailAdapter(o, context);
+        holder.recyclerViewBig.setAdapter(adapter);
 
         holder.no.setOnClickListener(v -> {
+            String storeID = o.getStoreID();
             orders_bll.deleteOrder(o.getId());
-            list.remove(o);
-            notifyItemRemoved(holder.getAdapterPosition());
+            list = orders_bll.getOrders_List(storeID);
+            notifyDataSetChanged();
+            Toast.makeText(context, "Cancelled", Toast.LENGTH_SHORT).show();
+        });
 
-            Toast.makeText(context, "Order canceled", Toast.LENGTH_SHORT).show();
+        holder.yes.setOnClickListener(v -> {
+            String storeID = o.getStoreID();
+            orders_bll.deleteOrder(o.getId());
+            list = orders_bll.getOrders_List(storeID);
+            notifyDataSetChanged();
+            Toast.makeText(context, "Delivered", Toast.LENGTH_SHORT).show();
         });
     }
 
@@ -130,24 +112,21 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.Orde
     }
 
     public class OrderItemVH extends RecyclerView.ViewHolder {
-        private ImageView image;
-        private TextView customerName, address, goodsName, amount, price, sum;
+        private TextView id, name, total;
 
-        private ImageButton yes, no;
+        private RecyclerView recyclerViewBig;
 
+        private ImageButton no, yes;
         public OrderItemVH(@NonNull View itemView) {
             super(itemView);
 
-            image = itemView.findViewById(R.id.thumbnailImage);
-            customerName = itemView.findViewById(R.id.txtCustomerName);
-            amount = itemView.findViewById(R.id.txtAmount);
-            price = itemView.findViewById(R.id.txtPrice);
-            address = itemView.findViewById(R.id.txtAddress);
-            goodsName = itemView.findViewById(R.id.txtProduct);
-            sum = itemView.findViewById(R.id.txtSum);
+            id = itemView.findViewById(R.id.orderidtxt);
+            recyclerViewBig = itemView.findViewById(R.id.recyclerView);
+            name = itemView.findViewById(R.id.customernametxt);
+            total = itemView.findViewById(R.id.totaltxt);
 
-            yes = itemView.findViewById(R.id.btnYes);
             no = itemView.findViewById(R.id.btnNo);
+            yes = itemView.findViewById(R.id.btnYes);
         }
     }
 }

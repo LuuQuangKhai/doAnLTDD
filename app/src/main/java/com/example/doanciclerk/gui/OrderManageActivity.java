@@ -1,20 +1,18 @@
 package com.example.doanciclerk.gui;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.doanciclerk.R;
-import com.example.doanciclerk.bll.Goods_BLL;
 import com.example.doanciclerk.bll.Orders_BLL;
-import com.example.doanciclerk.dto.Goods_DTO;
 import com.example.doanciclerk.dto.Order_DTO;
 import com.example.doanciclerk.non_gui.OrderItemAdapter;
-import com.example.doanciclerk.non_gui.StorageItemAdapter;
+import com.example.doanciclerk.non_gui.OrderItemDetailAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderManageActivity extends AppCompatActivity {
@@ -33,10 +31,17 @@ public class OrderManageActivity extends AppCompatActivity {
 
         orders_bll = new Orders_BLL(this);
         list = orders_bll.getOrders_List(storeID);
+        if(list == null)
+            list = new ArrayList<>();
 
-        OrderItemAdapter orderItemAdapter = new OrderItemAdapter(list, this);
+        OrderItemAdapter adapter = new OrderItemAdapter(list, this);
         recyclerView = findViewById(R.id.orderItem_recycler);
-        recyclerView.setAdapter(orderItemAdapter);
+        recyclerView.setAdapter(adapter);
+
+        ImageButton btnBackStore = findViewById(R.id.btnBackStore);
+        btnBackStore.setOnClickListener(v -> {
+            finish();
+        });
     }
 
     @Override
@@ -44,8 +49,8 @@ public class OrderManageActivity extends AppCompatActivity {
         super.onStart();
 
         list = orders_bll.getOrders_List(storeID);
-        OrderItemAdapter orderItemAdapter = new OrderItemAdapter(list, this);
+        OrderItemAdapter adapter = new OrderItemAdapter(list, this);
         recyclerView = findViewById(R.id.orderItem_recycler);
-        recyclerView.setAdapter(orderItemAdapter);
+        recyclerView.setAdapter(adapter);
     }
 }

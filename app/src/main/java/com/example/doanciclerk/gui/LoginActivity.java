@@ -26,7 +26,7 @@ public class LoginActivity extends AppCompatActivity {
         TabLayout tabLayout = findViewById(R.id.tabLayout);
         tabLayout.setTabTextColors(Color.parseColor("#727272"), Color.parseColor("#000000"));
         tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.red, null));
-        tabLayout.addTab(tabLayout.newTab().setText("Shop"), 0);
+        tabLayout.addTab(tabLayout.newTab().setText("Store"), 0);
         tabLayout.addTab(tabLayout.newTab().setText("Customer"), 1);
 
         db = new DatabaseHelper(this,"db_a", null, 1);
@@ -53,7 +53,14 @@ public class LoginActivity extends AppCompatActivity {
                 editor.putInt("Account Type", acc.getAccountType());
                 editor.apply();
 
-                Intent i = new Intent(this, ShopMainActivity.class);
+                Intent i;
+
+                if(acc.getAccountType() == 0){
+                    i = new Intent(this, ShopMainActivity.class);
+                }else{
+                    i = new Intent(this, CustomerMainActivity.class);
+                }
+
                 i.putExtra("Account", acc);
                 startActivity(i);
 

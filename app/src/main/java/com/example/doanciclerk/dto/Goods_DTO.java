@@ -4,16 +4,15 @@ import java.io.Serializable;
 
 public class Goods_DTO implements Serializable {
     private String id, image, name, description, storeID;
-    private int amount;
-    private double price;
+    private double price, discount;
 
-    public Goods_DTO(String id, String image, String name, String description, String storeID, int amount, double price) {
+    public Goods_DTO(String id, String image, String name, String description, String storeID, double discount, double price) {
         this.id = id;
         this.image = image;
         this.name = name;
         this.description = description;
         this.storeID = storeID;
-        this.amount = amount;
+        this.discount = discount;
         this.price = price;
     }
 
@@ -57,12 +56,12 @@ public class Goods_DTO implements Serializable {
         this.storeID = storeID;
     }
 
-    public int getAmount() {
-        return amount;
+    public double getDiscount() {
+        return this.discount;
     }
 
-    public void setAmount(int amount) {
-        this.amount = amount;
+    public void setDiscount(double discount) {
+        this.discount = discount;
     }
 
     public double getPrice() {

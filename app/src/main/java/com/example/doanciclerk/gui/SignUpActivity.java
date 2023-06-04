@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -70,10 +71,17 @@ public class SignUpActivity extends AppCompatActivity {
                     Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
                 }
 
+                db.close();
+
                 finish();
             }
             else
-                Toast.makeText(this, "Not enough infomation", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Not enough information", Toast.LENGTH_SHORT).show();
+        });
+
+        ImageButton btnBackStore = findViewById(R.id.btnBackStore);
+        btnBackStore.setOnClickListener(v -> {
+            finish();
         });
     }
 }

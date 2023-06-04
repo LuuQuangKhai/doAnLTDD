@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,7 +48,7 @@ public class StorageItemAdapter extends RecyclerView.Adapter<StorageItemAdapter.
         Goods_DTO g = list.get(position);
 
         String imageName = g.getImage().split("\\.", 2)[0];
-        InputStream is = null;
+        InputStream is;
         try{
             is = context.getResources().openRawResource(context.getResources().getIdentifier(imageName, "raw", context.getPackageName()));
         }
@@ -64,11 +65,12 @@ public class StorageItemAdapter extends RecyclerView.Adapter<StorageItemAdapter.
         holder.image.setImageBitmap(img);
         holder.name.setText(g.getName());
 
-        String amountText = "Left: " + String.valueOf(g.getAmount());
-        holder.amount.setText(amountText);
+        String saleText = String.valueOf(g.getDiscount());
+        holder.discount.setText(saleText);
 
-        String priceText = String.format("%.0f",g.getPrice()) + "₫";
+        String priceText = String.format("%.0f",g.getPrice()) + " ₫";
         holder.price.setText(priceText);
+        holder.price.setPaintFlags(holder.price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
         holder.itemView.setOnClickListener(v->{
             Goods_BLL goods_bll = new Goods_BLL(v.getContext());
@@ -83,12 +85,15 @@ public class StorageItemAdapter extends RecyclerView.Adapter<StorageItemAdapter.
 
     @Override
     public int getItemCount() {
-        return list.size();
+        if(list != null)
+            return list.size();
+
+        return 0;
     }
 
     public class StorageItemVH extends RecyclerView.ViewHolder {
         private ImageView image;
-        private TextView name, amount, price;
+        private TextView name, discount, price;
 
         public StorageItemVH(@NonNull View itemView) {
             super(itemView);
@@ -96,7 +101,7 @@ public class StorageItemAdapter extends RecyclerView.Adapter<StorageItemAdapter.
 
             image = itemView.findViewById(R.id.img_storageItem_image);
             name = itemView.findViewById(R.id.txt_storageItem_name);
-            amount = itemView.findViewById(R.id.txt_storageItem_amount);
+            discount = itemView.findViewById(R.id.txt_storageItem_discount);
             price = itemView.findViewById(R.id.txt_storageItem_price);
         }
     }

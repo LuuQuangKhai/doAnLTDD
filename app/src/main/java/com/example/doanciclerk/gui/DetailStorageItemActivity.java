@@ -51,7 +51,7 @@ public class DetailStorageItemActivity extends AppCompatActivity {
         name.setText(goods_dto.getName());
         desc.setText(goods_dto.getDescription());
         price.setText(String.valueOf(goods_dto.getPrice()));
-        amount.setText(String.valueOf(goods_dto.getAmount()));
+        amount.setText(String.valueOf(goods_dto.getDiscount()));
         image.setImageBitmap(getBitmapFromImage(goods_dto.getImage(), getApplicationContext()));
 
         image.setOnClickListener(v-> {
@@ -70,9 +70,9 @@ public class DetailStorageItemActivity extends AppCompatActivity {
             if(!price.getText().toString().isEmpty())
                 priceText = Double.parseDouble(price.getText().toString());
 
-            int amountText = 0;
+            double amountText = 0;
             if(!amount.getText().toString().isEmpty())
-                amountText = Integer.parseInt(amount.getText().toString());
+                amountText = Double.parseDouble(amount.getText().toString());
 
             if(!imageName.isEmpty() && !nameText.isEmpty() && !descText.isEmpty()){
                 goods_bll.updateGoods(new Goods_DTO(goods_dto.getId(), imageName, nameText, descText, goods_dto.getStoreID(), amountText, priceText));
@@ -148,6 +148,8 @@ public class DetailStorageItemActivity extends AppCompatActivity {
         Cursor c = getContentResolver().query(uri, null,null,null);
         int name = c.getColumnIndex(OpenableColumns.DISPLAY_NAME);
         c.moveToFirst();
-        return c.getString(name);
+        String nameS = c.getString(name);
+        c.close();
+        return nameS;
     }
 }

@@ -1,9 +1,11 @@
 {
   "accounts": [{ "id": "store1", "password": 123, "accountType": 0},
+    { "id": "store2", "password": 123, "accountType": 0},
     {"id": "customer1", "password": 123, "accountType": 1},
     {"id": "customer2", "password": 123, "accountType": 1}
   ],
-  "stores": [{ "id" : "store1", "name" : "Store A", "address" : "somewhere on earth", "wallet" : 2000000}
+  "stores": [{ "id" : "store1", "name" : "Store A", "address" : "somewhere on earth", "wallet" : 2000000},
+    { "id" : "store2", "name" : "Store B", "address" : "somewhere on earth ?", "wallet" : 3000000}
   ],
   "customers": [
     {
@@ -22,15 +24,13 @@
   "orders": [
     {
       "id": "OR_1",
-      "goodsID": "GO_1",
-      "goodsAmount": 20,
+      "goodsList": [{"goodsID" :  "GO_1", "amount" :  5}, {"goodsID" :  "GO_2", "amount" :  10}],
       "storeID": "store1",
       "customerID": "customer1"
     },
     {
       "id": "OR_2",
-      "goodsID": "GO_2",
-      "goodsAmount": 10,
+      "goodsList": [{"goodsID" :  "GO_3", "amount" :  2}, {"goodsID" :  "GO_4", "amount" :  6}],
       "storeID": "store1",
       "customerID": "customer2"
     }
@@ -41,7 +41,7 @@
       "image": "apple.jpg",
       "name" : "Apple",
       "description" : "Good apple",
-      "amount" : 10,
+      "discount" : 0.00,
       "price" : 5000,
       "storeID" : "store1"
     },
@@ -50,9 +50,99 @@
       "image": "kiwi.jpg",
       "name" : "Kiwi",
       "description" : "Super good kiwi",
-      "amount" : 30,
+      "discount" : 0.00,
       "price" : 8000,
       "storeID" : "store1"
+    },
+    {
+      "id": "GO_3",
+      "image": "chuoi.jpg",
+      "name" : "Banana",
+      "description" : "Decent banana",
+      "discount" : 0.00,
+      "price" : 4000,
+      "storeID" : "store1"
+    },
+    {
+      "id": "GO_4",
+      "image": "banhmiopla.png",
+      "name" : "Omelette Bread",
+      "description" : "Delicious and cheap",
+      "discount" : 0.00,
+      "price" : 15000,
+      "storeID" : "store1"
+    },
+    {
+      "id": "GO_5",
+      "image": "up7.jpg",
+      "name" : "7 Up",
+      "description" : "Good and sour",
+      "discount" : 0.00,
+      "price" : 7000,
+      "storeID" : "store1"
+    },
+    {
+      "id": "GO_6",
+      "image": "up7.jpg",
+      "name" : "7 Up",
+      "description" : "Better than 7 Up from store A",
+      "discount" : 0.00,
+      "price" : 10000,
+      "storeID" : "store2"
+    },
+    {
+      "id": "GO_7",
+      "image": "cocacola.jpg",
+      "name" : "Coca cola",
+      "description" : "ok",
+      "discount" : 0.00,
+      "price" : 9000,
+      "storeID" : "store1"
+    },
+    {
+      "id": "GO_8",
+      "image": "pepsi.jpg",
+      "name" : "Pepsi",
+      "description" : "May stick in your teeth but still good sometimes",
+      "discount" : 0.00,
+      "price" : 8000,
+      "storeID" : "store2"
+    },
+    {
+      "id": "GO_9",
+      "image": "cachep.jpg",
+      "name" : "Carp",
+      "description" : "Fresh",
+      "discount" : 0.00,
+      "price" : 50000,
+      "storeID" : "store2"
+    },
+    {
+      "id": "GO_10",
+      "image": "tomsus.jpg",
+      "name" : "Shrimp",
+      "description" : "Freshh",
+      "discount" : 0.00,
+      "price" : 80000,
+      "storeID" : "store2"
+    },
+    {
+      "id": "GO_11",
+      "image": "cua.jpg",
+      "name" : "Crab",
+      "description" : "Freshhh",
+      "discount" : 0.00,
+      "price" : 50000,
+      "storeID" : "store2"
+    },
+    {
+      "id": "GO_12",
+      "image": "muc.jpg",
+      "name" : "Squid",
+      "description" : "Freshhhh",
+      "discount" : 0.00,
+      "price" : 58000,
+      "storeID" : "store2"
     }
   ]
 }

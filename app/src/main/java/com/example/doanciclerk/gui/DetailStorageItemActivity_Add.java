@@ -117,6 +117,8 @@ public class DetailStorageItemActivity_Add extends AppCompatActivity {
         Cursor c = getContentResolver().query(uri, null,null,null);
         int name = c.getColumnIndex(OpenableColumns.DISPLAY_NAME);
         c.moveToFirst();
-        return c.getString(name);
+        String nameS = c.getString(name);
+        c.close();
+        return nameS;
     }
 }

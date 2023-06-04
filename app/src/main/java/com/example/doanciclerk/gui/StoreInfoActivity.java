@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,7 +18,7 @@ public class StoreInfoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.storeinfo_ui);
+        setContentView(R.layout.userinfo_ui);
 
         Store_BLL store_bll = new Store_BLL(this);
         Store_DTO thisStore = (Store_DTO) getIntent().getSerializableExtra("Store");
@@ -59,6 +58,11 @@ public class StoreInfoActivity extends AppCompatActivity {
             }
             else
                 Toast.makeText(this, "Cannot change", Toast.LENGTH_SHORT).show();
+        });
+
+        ImageButton btnBackStore = findViewById(R.id.btnBackStore);
+        btnBackStore.setOnClickListener(v -> {
+            finish();
         });
     }
 }

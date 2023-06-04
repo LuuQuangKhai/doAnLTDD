@@ -9,88 +9,97 @@
     android:layout_marginHorizontal="10dp"
     android:layout_marginBottom="30dp">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp">
+        android:layout_height="wrap_content"
+        android:paddingVertical="10dp">
 
+        <TextView
+            android:id="@+id/orderidtxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="OrderID: ?"
+            android:textStyle="bold"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
         <LinearLayout
             android:id="@+id/linear1"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:background="@drawable/vertical_border"
             android:layout_gravity="center"
-            android:padding="6dp">
+            android:paddingVertical="10dp"
+            app:layout_constraintVertical_bias="0.1"
+            app:layout_constraintTop_toBottomOf="@id/orderidtxt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
-            <ImageView
-                android:id="@+id/thumbnailImage"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"/>
-
-            <LinearLayout
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginStart="5dp">
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"/>
 
-                <TextView
-                    android:id="@+id/txtCustomerName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Name: "/>
-
-                <TextView
-                    android:id="@+id/txtAddress"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="To: "
-                    android:layout_weight="1"/>
-
-                <TextView
-                    android:id="@+id/txtProduct"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Product: "/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/txtPrice"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Price: $$$$$"
-                        android:layout_weight="1"/>
-
-                    <TextView
-                        android:id="@+id/txtAmount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Amount: $$$"
-                        android:layout_weight="1"/>
-
-                    <TextView
-                        android:id="@+id/txtSum"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Sum: $$$$$$$"
-                        android:layout_weight="3"
-                        android:textStyle="bold"/>
-                </LinearLayout>
-            </LinearLayout>
         </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/btnYes"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:background="#FFFFFF"
-            app:srcCompat="@drawable/check"
-            android:scaleType="fitCenter"
-            android:layout_below="@id/linear1"
-            android:layout_alignEnd="@id/linear1"
-            android:layout_marginEnd="6dp"/>
+        <LinearLayout
+            android:id="@+id/linearCustomer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp"
+            android:paddingStart="20dp"
+            app:layout_constraintTop_toBottomOf="@id/linear1"
+            app:layout_constraintEnd_toStartOf="@id/btnYes"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/customernamelabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="Customer Name: "
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/customernametxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="Customer Name"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearTotal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp"
+            android:paddingStart="20dp"
+            app:layout_constraintTop_toBottomOf="@id/linearCustomer"
+            app:layout_constraintEnd_toStartOf="@id/btnYes"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/totallabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="Total: "
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/totaltxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="Total"/>
+        </LinearLayout>
 
         <ImageButton
             android:id="@+id/btnNo"
@@ -99,8 +108,23 @@
             android:background="#FFFFFF"
             app:srcCompat="@drawable/remove"
             android:scaleType="fitCenter"
-            android:layout_below="@id/linear1"
-            android:layout_toStartOf="@id/btnYes"
-            android:layout_marginEnd="15dp"/>
-    </RelativeLayout>
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/linearTotal"
+            app:layout_constraintEnd_toStartOf="@id/btnYes"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.97"/>
+
+        <ImageButton
+            android:id="@+id/btnYes"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:background="#FFFFFF"
+            app:srcCompat="@drawable/check"
+            android:scaleType="fitCenter"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/linearTotal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.97"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

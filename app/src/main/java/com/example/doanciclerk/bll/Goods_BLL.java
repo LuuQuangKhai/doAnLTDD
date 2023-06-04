@@ -3,7 +3,6 @@ package com.example.doanciclerk.bll;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 
 import com.example.doanciclerk.dal.DatabaseHelper;
 import com.example.doanciclerk.dto.Goods_DTO;
@@ -33,8 +32,11 @@ public class Goods_BLL {
                     break;
                 }
 
-                if(c.isLast())
+                if(c.isLast()) {
+                    c.close();
+                    db.close();
                     return newID;
+                }
             }
 
             c.moveToFirst();
@@ -46,27 +48,61 @@ public class Goods_BLL {
         String sql = "SELECT * FROM Goods WHERE ID = ? AND StoreID = ?;";
         Cursor c = db.getReadableDatabase().rawQuery(sql, new String[] {id, storeID});
 
-        if(c.moveToFirst())
-            return new Goods_DTO(c.getString(0), c.getString(1), c.getString(2), c.getString(5), c.getString(6), c.getInt(3), c.getDouble(4));
+        if(c.moveToFirst()){
+            Goods_DTO goods_dto = new Goods_DTO(c.getString(0), c.getString(1), c.getString(2), c.getString(5), c.getString(6), c.getDouble(3), c.getDouble(4));
+            c.close();
+            db.close();
+            return goods_dto;
+        }
 
+        c.close();
         db.close();
         return null;
     }
 
-    public List<Goods_DTO> getGoods_List(){
-        List<Goods_DTO> list = null;
+    public List<Goods_DTO> search(String name, String storeID){
+        List<Goods_DTO> list = new ArrayList<>();
 
-        String sql = "SELECT * FROM Goods";
-        Cursor c = db.getReadableDatabase().rawQuery(sql, null);
+        String sql = "SELECT * FROM Goods WHERE StoreID = ?;";
 
-        if(c.moveToFirst()){
-            list = new ArrayList<>();
-            list.add(new Goods_DTO(c.getString(0), c.getString(1), c.getString(2), c.getString(5), c.getString(6), c.getInt(3), c.getDouble(4)));
+        if(!name.isEmpty())
+            sql = "SELECT * FROM Goods WHERE StoreID = ? AND Name LIKE '%" + name + "%';";
 
-            while (c.moveToNext())
-                list.add(new Goods_DTO(c.getString(0), c.getString(1), c.getString(2), c.getString(5), c.getString(6), c.getInt(3), c.getDouble(4)));
+        Cursor c = db.getReadableDatabase().rawQuery(sql, new String[] {storeID});
+
+        while(c.moveToNext()){
+            list.add(new Goods_DTO(c.getString(0), c.getString(1), c.getString(2), c.getString(5), c.getString(6), c.getDouble(3), c.getDouble(4)));
         }
 
+        c.close();
+        db.close();
+        return list;
+    }
+
+    public List<Goods_DTO> getGoods_List_All(){
+        List<Goods_DTO> list = new ArrayList<>();
+
+        String sql = "SELECT * FROM Goods;";
+        Cursor c = db.getReadableDatabase().rawQuery(sql, null);
+
+        while (c.moveToNext())
+            list.add(new Goods_DTO(c.getString(0), c.getString(1), c.getString(2), c.getString(5), c.getString(6), c.getDouble(3), c.getDouble(4)));
+
+        c.close();
+        db.close();
+        return list;
+    }
+
+    public List<Goods_DTO> getGoods_List_StoreOnly(String storeID){
+        List<Goods_DTO> list = new ArrayList<>();
+
+        String sql = "SELECT * FROM Goods WHERE StoreID = ?;";
+        Cursor c = db.getReadableDatabase().rawQuery(sql, new String[] {storeID});
+
+        while (c.moveToNext())
+            list.add(new Goods_DTO(c.getString(0), c.getString(1), c.getString(2), c.getString(5), c.getString(6), c.getDouble(3), c.getDouble(4)));
+
+        c.close();
         db.close();
         return list;
     }
@@ -78,7 +114,7 @@ public class Goods_BLL {
         values.put("Name", g.getName());
         values.put("Description", g.getDescription());
         values.put("StoreID", g.getStoreID());
-        values.put("Amount", g.getAmount());
+        values.put("Discount", g.getDiscount());
         values.put("Price", g.getPrice());
 
         db.getWritableDatabase().update("Goods", values, "ID = ?", new String[]{g.getId()});
@@ -97,7 +133,7 @@ public class Goods_BLL {
         values.put("Name", g.getName());
         values.put("Description", g.getDescription());
         values.put("StoreID", g.getStoreID());
-        values.put("Amount", g.getAmount());
+        values.put("Discount", g.getDiscount());
         values.put("Price", g.getPrice());
 
         db.getWritableDatabase().insert("Goods", null, values);
