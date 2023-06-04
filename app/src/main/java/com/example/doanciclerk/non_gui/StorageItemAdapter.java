@@ -65,12 +65,16 @@ public class StorageItemAdapter extends RecyclerView.Adapter<StorageItemAdapter.
         holder.image.setImageBitmap(img);
         holder.name.setText(g.getName());
 
-        String saleText = String.valueOf(g.getDiscount());
+        String saleText = String.format("%.0f",g.getDiscount()) + " ₫";
         holder.discount.setText(saleText);
+
+        if(g.getDiscount() == 0)
+            holder.discount.setVisibility(View.INVISIBLE);
+        else
+            holder.price.setPaintFlags(holder.price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
         String priceText = String.format("%.0f",g.getPrice()) + " ₫";
         holder.price.setText(priceText);
-        holder.price.setPaintFlags(holder.price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
         holder.itemView.setOnClickListener(v->{
             Goods_BLL goods_bll = new Goods_BLL(v.getContext());

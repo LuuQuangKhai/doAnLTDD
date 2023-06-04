@@ -78,7 +78,7 @@ public class CustomerMainItemAdapter extends RecyclerView.Adapter<CustomerMainIt
         holder.image.setImageBitmap(img);
         holder.name.setText(g.getName());
 
-        String saleText = String.valueOf(g.getDiscount());
+        String saleText = String.format("%.0f",g.getDiscount()) + " ₫";
         holder.discount.setText(saleText);
 
         String priceText = String.format("%.0f",g.getPrice()) + " ₫";

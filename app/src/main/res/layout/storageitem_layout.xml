@@ -42,7 +42,8 @@
                 android:layout_height="wrap_content"
                 android:text="Sale "
                 android:textSize="15sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:textColor="@color/red"/>
 
             <TextView
                 android:id="@+id/txt_storageItem_price"
@@ -52,8 +53,7 @@
                 android:textSize="15sp"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="10dp"
-                android:textStyle="bold"
-                android:textColor="@color/red"/>
+                android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
 
